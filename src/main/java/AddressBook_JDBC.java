@@ -4,14 +4,11 @@ public class AddressBook_JDBC {
     public static void CreateConnection() {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Payroll_servicedb","root","mysql@1234");
-            String select = "select * from emp_service";
-          PreparedStatement pstm = con.prepareStatement(select);
-           ResultSet res = pstm.executeQuery();
-           while(res.next()){
-               String name = res.getString("name");
-               String Date = res.getString("Date");
-               System.out.println("Data"+name+","+Date);
-           }
+             Statement stm = con.createStatement();
+             stm.execute("select sum(salary) from emp_service");
+            stm.execute("select Avg(salary) from emp_service");
+            stm.execute("select min(salary) from emp_service");
+            stm.execute("select Avg(salary) from emp_service");
         } catch (SQLException e) {
             e.printStackTrace();
         }
